@@ -13,7 +13,7 @@ description: Bring-your-own providers, registration boundary and local/S3 media 
 | OpenRouter | Canvas Assistant and Automation AI planning | `OPENROUTER_API_KEY` |
 | Tikwm | Public TikTok post metadata/media resolution | No key |
 
-The stack starts without Kie/OpenRouter keys; only their capabilities remain unavailable. Keys stay in the server environment. The browser and MCP see configured/not-configured status, never the values. Restart after changing a key.
+The stack starts without Kie/OpenRouter keys; only their capabilities remain unavailable. Keys stay in the server environment. The browser and MCP see configured/not-configured status, never the values. Restart after changing a key. `KIE_WEBHOOK_HMAC_KEY` is optional and verifies Kie webhook callbacks when that provider path is configured.
 
 Run `./scenelith doctor` to validate the Compose model, provider presence, storage and disk without printing secrets. `--strict-providers` requires both paid providers; `--json` produces automation-friendly output.
 
@@ -27,7 +27,7 @@ Self-hosted does not include Cloud team invitations, payment services, Google si
 
 ## Local media
 
-Default media lives in the persistent `scenelith-data` Docker volume. PostgreSQL and Redis use separate persistent volumes. Removing containers keeps volumes; `docker compose down -v` permanently removes them and must not be used as a routine restart.
+Default media lives in the persistent `scenelith-data` Docker volume. PostgreSQL uses `scenelith-postgres`; Redis uses `scenelith-redis`; Caddy keeps certificate/configuration state in its own two volumes. Removing containers keeps volumes; `docker compose down -v` permanently removes them and must not be used as a routine restart.
 
 ## S3-compatible media
 

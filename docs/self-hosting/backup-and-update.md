@@ -9,6 +9,7 @@ description: Verified release updates, rollback and explicit disaster recovery.
 
 ```bash
 ./scenelith backup
+./scenelith backup --output /mnt/encrypted-backups
 ```
 
 The launcher briefly quiesces application writers, creates a PostgreSQL custom-format dump, archives local media and records checksums plus release metadata. The deployment `.env` and its secrets are never copied. S3-compatible media remains in operator-owned object storage and needs its own versioning/snapshot policy.
@@ -26,7 +27,7 @@ Keep encrypted backups off the application host.
 
 The updater verifies the release archive and internal manifest, creates a backup, preserves the environment/volumes, installs only allowlisted deployment files, pulls the pinned image, applies ordered migrations and waits for health. If the new stack does not become healthy, it restores the prior deployment files and image.
 
-Applied migrations are expand-only. Never edit an already-applied migration.
+Applied migrations are expand-only. Never edit an already-applied migration. `./scenelith update` is for release-bundle installations; source checkouts update through Git and tagged releases.
 
 ## Restore
 

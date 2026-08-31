@@ -1,4 +1,5 @@
 import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
+import automationNodeSidebar from './automation-node-sidebars';
 
 const sidebars: SidebarsConfig = {
   docs: [
@@ -52,17 +53,9 @@ const sidebars: SidebarsConfig = {
         'automation/portability-and-fixtures',
         {
           type: 'category',
-          label: 'Node reference',
-          items: [
-            'automation/node-reference',
-            'automation/nodes/triggers',
-            'automation/nodes/inputs',
-            'automation/nodes/ai',
-            'automation/nodes/logic',
-            'automation/nodes/integrations',
-            'automation/nodes/generation',
-            'automation/nodes/outputs',
-          ],
+          label: 'Nodes',
+          link: {type: 'doc', id: 'automation/nodes'},
+          items: automationNodeSidebar,
         },
         'automation/runs-and-triggers',
       ],
@@ -80,7 +73,16 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Self-hosting',
-      items: ['self-hosting/overview', 'self-hosting/providers-and-storage', 'self-hosting/backup-and-update', 'self-hosting/public-url'],
+      items: [
+        'self-hosting/overview',
+        'self-hosting/installation',
+        'self-hosting/configuration',
+        'self-hosting/providers-and-storage',
+        'self-hosting/operations',
+        'self-hosting/backup-and-update',
+        'self-hosting/public-url',
+        'self-hosting/runtime-architecture',
+      ],
     },
   ],
 };

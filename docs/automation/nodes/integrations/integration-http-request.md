@@ -1,19 +1,25 @@
 ---
-title: Integration nodes
-description: Complete inputs, outputs, settings and runtime guidance for the current nodes in Integrations.
+title: "Connect an external service"
+description: "Sends information to an external app or API and passes its answer to the next step. Complete settings, connections, runtime behavior and usage guidance."
 ---
 
-# Integration nodes
-
-This page is generated from the current Automation registry and contains **1 current node** in the **Integrations** category.
-
-## Connect an external service {#integration-http-request}
+# Connect an external service
 
 `integration.http-request@1`
 
+## What this node does
+
 Sends information to an external app or API and passes its answer to the next step.
 
-**Registry metadata:** category `integration`; icon `http`; accent `blue`; terminal no; retry-safe no. Example: Send a finished caption to your publishing service, or ask another API for campaign data.
+| Category | Terminal step | Safe to retry |
+| --- | --- | --- |
+| Integrations | No | No |
+
+## When to use it
+
+Use this to exchange data with an external service that provides an HTTP API, such as publishing, enrichment or a custom backend.
+
+## Connections
 
 | Direction | Port | Type | Contract |
 | --- | --- | --- | --- |
@@ -21,7 +27,11 @@ Sends information to an external app or API and passes its answer to the next st
 | Output | Service response `response` | `data` | Typed output · Connectable |
 | Output | Error path `error` | `error` | Typed output · Connectable |
 
-| Setting | Kind | Contract | Default / choices |
+## Settings
+
+These are the settings shown by the current Automation editor. Conditional and advanced fields are called out explicitly.
+
+| Setting | Control | Rules | Default or choices |
 | --- | --- | --- | --- |
 | **Where should the request go?** `url`<br/>Paste a complete public HTTP or HTTPS address. Private-network and credential-in-URL addresses are blocked. Placeholder: https://api.example.com/v1/action | `text` | Required · Fixed only | `` |
 | **What should the service do?** `method`<br/>GET reads data, HEAD checks metadata, and POST usually creates or sends data. Match the service documentation. | `select` | Optional · Fixed only | GET (`GET`) / HEAD (`HEAD`) / POST (`POST`) / PUT (`PUT`) / PATCH (`PATCH`) / DELETE (`DELETE`) |
@@ -33,9 +43,7 @@ Sends information to an external app or API and passes its answer to the next st
 | **How many times to try** `maxAttempts`<br/>Retries temporary network or service failures. Create or change requests need an explicit Idempotency-Key header before more than one attempt is allowed. | `number` | Optional · 1–5 · Fixed only · Advanced | `1` |
 | **If the service still fails** `failureMode`<br/>Stop, route a safe error response to a recovery path, or continue with an empty service response. | `select` | Optional · Fixed only · Advanced | Stop and show the error (`stop`) / Send the error to another path (`error-output`) / Continue without an answer (`continue-empty`) |
 
-**Use it when:** Use this to exchange data with an external service that provides an HTTP API, such as publishing, enrichment or a custom backend.
-
-**Setup**
+## How to configure it
 
 1. Read the service API documentation and choose the URL and method it requires.
 2. Build the request body from earlier workflow data.
@@ -43,8 +51,20 @@ Sends information to an external app or API and passes its answer to the next st
 4. In Settings, connect a saved credential.
 5. Connect Service response and decide whether an error should stop or follow a recovery path.
 
-**Example path:** Approved caption → Publishing service response. The request runs on the server with the saved credential; only the service response enters the workflow.
+## Example flow
 
-**Tips:** Never paste API keys into URL, headers or body fields. Test with a non-production endpoint or fixture first.
+**Approved caption → Publishing service response**
 
-**Technical behavior:** Server-side HTTP transport blocks private-network targets and applies timeout, retry and response-size policies. Only network failures, rate limits, selected conflict statuses and server errors are retried. POST, PUT, PATCH and DELETE send JSON; GET and HEAD send no body. Successful responses include status, success flag, safe headers and parsed JSON or text body. Redirects are not followed and count as unsuccessful responses. When Send the error to another path is enabled, that path receives the safe response status, headers and body when the service returned one. Credential bindings stay local and are excluded from exports.
+The request runs on the server with the saved credential; only the service response enters the workflow.
+
+## What happens at run time
+
+- Server-side HTTP transport blocks private-network targets and applies timeout, retry and response-size policies. Only network failures, rate limits, selected conflict statuses and server errors are retried.
+- POST, PUT, PATCH and DELETE send JSON; GET and HEAD send no body. Successful responses include status, success flag, safe headers and parsed JSON or text body. Redirects are not followed and count as unsuccessful responses.
+- When Send the error to another path is enabled, that path receives the safe response status, headers and body when the service returned one.
+- Credential bindings stay local and are excluded from exports.
+
+## Practical notes
+
+- Never paste API keys into URL, headers or body fields.
+- Test with a non-production endpoint or fixture first.

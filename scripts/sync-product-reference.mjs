@@ -1,4 +1,4 @@
-import {mkdirSync, readFileSync, writeFileSync} from 'node:fs';
+import {mkdirSync, readFileSync, readdirSync, rmSync, writeFileSync} from 'node:fs';
 import {resolve} from 'node:path';
 import {spawnSync} from 'node:child_process';
 import {createHash} from 'node:crypto';
@@ -78,6 +78,20 @@ generationPricingCases.forEach((entry, index) => {
 const coreRevision = spawnSync('git', ['rev-parse', 'HEAD'], {cwd: coreRoot, encoding: 'utf8'}).stdout.trim();
 const coreDirty = Boolean(spawnSync('git', ['status', '--porcelain'], {cwd: coreRoot, encoding: 'utf8'}).stdout.trim());
 const sourceHash = (path) => createHash('sha256').update(readFileSync(resolve(coreRoot, path))).digest('hex');
+const selfhostEnvironmentSource = readFileSync(resolve(coreRoot, 'deploy/selfhost/.env.example'), 'utf8');
+const selfhostLauncherSource = readFileSync(resolve(coreRoot, 'scenelith'), 'utf8');
+const sharedRuntimeComposeSource = readFileSync(resolve(coreRoot, 'deploy/compose/runtime.yaml'), 'utf8');
+const selfhostComposeSource = readFileSync(resolve(coreRoot, 'deploy/selfhost/compose.yaml'), 'utf8');
+const selfhostProviderManifest = JSON.parse(readFileSync(resolve(coreRoot, 'config/runtime-providers.json'), 'utf8'));
+const selfhostEnvironmentVariables = [...selfhostEnvironmentSource.matchAll(/^([A-Z][A-Z0-9_]*)=/gm)].map((match) => match[1]);
+const selfhostUsage = selfhostLauncherSource.match(/Commands:\n([\s\S]+?)\n\nProvider keys/)?.[1] || '';
+const selfhostLauncherCommands = [...selfhostUsage.matchAll(/^  ([a-z][a-z-]*)(?:\s|$)/gm)].map((match) => match[1]);
+const composeServices = (source) => {
+  const afterServices = source.split(/^services:\n/m)[1] || '';
+  const section = afterServices.split(/^[a-z][a-z0-9-]*:\n/m)[0];
+  return [...section.matchAll(/^  ([a-z][a-z0-9-]+):$/gm)].map((match) => match[1]);
+};
+const selfhostServices = [...new Set([...composeServices(sharedRuntimeComposeSource), ...composeServices(selfhostComposeSource)])];
 const portableCanvasSource = readFileSync(resolve(coreRoot, 'src/lib/scenelith-document.ts'), 'utf8');
 const canvasKindsMatch = portableCanvasSource.match(/const nodeKind = z\.enum\(\[([^\]]+)\]\)/);
 if (!canvasKindsMatch) throw new Error('Could not read the Canvas node-kind contract');
@@ -191,56 +205,69 @@ const categoryNodeLabels = {
   output: 'Output nodes',
 };
 
+const automationNodeSlug = (node) => node.type.replaceAll('.', '-');
+const automationNodeRoute = (node) => `automation/nodes/${categorySlugs[node.category]}/${automationNodeSlug(node)}`;
+
 const automationIndexLines = [
   '---',
-  'title: Automation node reference',
-  'description: Browse every current Automation node by category and open its complete versioned contract.',
+  'title: Automation nodes',
+  'description: Every current Automation node, with its settings, connections, runtime behavior and practical use.',
   '---',
   '',
-  '# Automation node reference',
+  '# Automation nodes',
   '',
-  `Scenelith currently exposes **${automationNodes.length} current Automation node types**. Connections are typed: a port accepts only compatible data. A saved workflow can retain an older node version; this reference describes the latest version offered when adding a node.`,
+  `Scenelith currently exposes **${automationNodes.length} current Automation nodes**. Every node below has its own page covering what it does, when to use it, every setting, its typed inputs and outputs, and what happens at run time.`,
   '',
-  '| Category | Nodes | Reference |',
-  '| --- | ---: | --- |',
-  ...Object.entries(categoryNames).map(([category, label]) => `| ${label} | ${automationNodes.filter((node) => node.category === category).length} | [Open ${label.toLowerCase()}](./nodes/${categorySlugs[category]}.md) |`),
-  '',
-  '## Complete current inventory',
-  '',
-  '| Node | Version | Category |',
-  '| --- | --- | --- |',
-  ...automationNodes.map((node) => `| [${text(node.title)}](./nodes/${categorySlugs[node.category]}.md#${node.type.replaceAll('.', '-')}) | \`${node.type}@${node.version}\` | ${categoryNames[node.category]} |`),
-  '',
-  '> Each category page is generated from the same versioned node registry used by the visual editor, MCP capabilities and runtime validation.',
+  '> This catalogue is generated from the same versioned registry used by the Automation editor, MCP and workflow worker. A saved published workflow can retain an older node version; these pages describe the current version offered when adding a node.',
   '',
 ];
 
 const automationNodePages = {};
-const automationCategoryDocuments = new Map();
+const automationNodeDocuments = new Map();
+const automationSidebarCategories = [];
 for (const [category, label] of Object.entries(categoryNames)) {
   const categoryNodes = automationNodes.filter((item) => item.category === category);
-  const pageTitle = categoryNodeLabels[category];
-  const categoryLines = [
-    '---',
-    `title: ${pageTitle}`,
-    `description: Complete inputs, outputs, settings and runtime guidance for the current nodes in ${label}.`,
-    '---',
+  automationIndexLines.push(
+    `## ${categoryNodeLabels[category]}`,
     '',
-    `# ${pageTitle}`,
+    `**${categoryNodes.length} node${categoryNodes.length === 1 ? '' : 's'}**`,
     '',
-    `This page is generated from the current Automation registry and contains **${categoryNodes.length} current node${categoryNodes.length === 1 ? '' : 's'}** in the **${label}** category.`,
+    '| Node | What it does |',
+    '| --- | --- |',
+    ...categoryNodes.map((node) => `| [**${text(node.title)}**](./nodes/${categorySlugs[category]}/${automationNodeSlug(node)}.md)<br/>\`${node.type}@${node.version}\` | ${text(node.description)} |`),
     '',
-  ];
+  );
+  automationSidebarCategories.push({
+    type: 'category',
+    label: categoryNodeLabels[category],
+    items: categoryNodes.map((node) => automationNodeRoute(node)),
+  });
   for (const node of categoryNodes) {
-    automationNodePages[`${node.type}@${node.version}`] = `automation/nodes/${categorySlugs[category]}.md`;
-    categoryLines.push(
-      `## ${text(node.title)} {#${node.type.replaceAll('.', '-')}}`,
+    const route = automationNodeRoute(node);
+    automationNodePages[`${node.type}@${node.version}`] = `${route}.md`;
+    const nodeLines = [
+      '---',
+      `title: ${JSON.stringify(text(node.title))}`,
+      `description: ${JSON.stringify(`${text(node.description)} Complete settings, connections, runtime behavior and usage guidance.`)}`,
+      '---',
+      '',
+      `# ${text(node.title)}`,
       '',
       `\`${node.type}@${node.version}\``,
       '',
+      '## What this node does',
+      '',
       text(node.description),
       '',
-      `**Registry metadata:** category \`${node.category}\`; icon \`${node.icon}\`; accent \`${node.accent}\`; terminal ${node.terminal ? 'yes' : 'no'}; retry-safe ${node.retrySafe ? 'yes' : 'no'}.${node.example ? ` Example: ${text(node.example)}` : ''}`,
+      '| Category | Terminal step | Safe to retry |',
+      '| --- | --- | --- |',
+      `| ${label} | ${node.terminal ? 'Yes' : 'No'} | ${node.retrySafe ? 'Yes' : 'No'} |`,
+      '',
+      '## When to use it',
+      '',
+      node.help?.whenToUse ? text(node.help.whenToUse) : text(node.example || node.description),
+      '',
+      '## Connections',
       '',
       '| Direction | Port | Type | Contract |',
       '| --- | --- | --- | --- |',
@@ -253,9 +280,9 @@ for (const [category, label] of Object.entries(categoryNames)) {
         return `| Output | ${text(port.label)} \`${port.id}\` | \`${port.type}\` | ${contract} |`;
       }) : ['| Output | — | — | — |']),
       '',
-    );
+    ];
     if (node.fields.length) {
-      categoryLines.push('| Setting | Kind | Contract | Default / choices |', '| --- | --- | --- | --- |');
+      nodeLines.push('## Settings', '', 'These are the settings shown by the current Automation editor. Conditional and advanced fields are called out explicitly.', '', '| Setting | Control | Rules | Default or choices |', '| --- | --- | --- | --- |');
       for (const field of node.fields) {
         const choices = field.options?.length
           ? field.options.map((option) => `${option.label} (\`${option.value}\`)`).join(' / ')
@@ -263,27 +290,39 @@ for (const [category, label] of Object.entries(categoryNames)) {
         const bounds = field.min !== undefined && field.max !== undefined ? `${field.min}–${field.max}` : field.min !== undefined ? `minimum ${field.min}` : field.max !== undefined ? `maximum ${field.max}` : '';
         const contract = [field.required ? 'Required' : 'Optional', bounds, field.runtimeBindable ? 'Ask on run allowed' : 'Fixed only', field.defaultRunInput ? 'Ask on run by default' : '', field.requiredWhenVisible ? 'Required when visible' : '', field.runtimeValueType ? `runtime \`${field.runtimeValueType}\`` : '', field.readOnly ? 'Read-only' : '', field.advanced ? 'Advanced' : '', field.secret ? 'Secret' : '', field.modelCapability ? `model capability \`${field.modelCapability}\`` : '', field.visibleWhen ? `visible when \`${field.visibleWhen.fieldId}\` is ${field.visibleWhen.values.map((value) => JSON.stringify(value)).join(' / ')}` : ''].filter(Boolean).join(' · ');
         const description = [field.description, field.placeholder ? `Placeholder: ${field.placeholder}` : ''].filter(Boolean).map(text).join(' ');
-        categoryLines.push(`| **${text(field.label)}** \`${field.id}\`<br/>${description || '—'} | \`${field.kind}\` | ${contract} | ${text(choices)} |`);
+        nodeLines.push(`| **${text(field.label)}** \`${field.id}\`<br/>${description || '—'} | \`${field.kind}\` | ${contract} | ${text(choices)} |`);
       }
-      categoryLines.push('');
+      nodeLines.push('');
+    } else {
+      nodeLines.push('## Settings', '', 'This node has no configurable fields. Its behavior is determined by its typed connections and the workflow run context.', '');
     }
     if (node.help) {
-      categoryLines.push('**Use it when:** ' + text(node.help.whenToUse), '');
-      if (node.help.setup?.length) categoryLines.push('**Setup**', '', ...node.help.setup.map((step, index) => `${index + 1}. ${text(step)}`), '');
-      if (node.help.exampleFlow) categoryLines.push(`**Example path:** ${text(node.help.exampleFlow.before)} → ${text(node.help.exampleFlow.after)}. ${text(node.help.exampleFlow.explanation)}`, '');
-      if (node.help.tips?.length) categoryLines.push('**Tips:** ' + node.help.tips.map(text).join(' '), '');
-      if (node.help.technicalNotes?.length) categoryLines.push('**Technical behavior:** ' + node.help.technicalNotes.map(text).join(' '), '');
+      if (node.help.setup?.length) nodeLines.push('## How to configure it', '', ...node.help.setup.map((step, index) => `${index + 1}. ${text(step)}`), '');
+      if (node.help.exampleFlow) nodeLines.push('## Example flow', '', `**${text(node.help.exampleFlow.before)} → ${text(node.help.exampleFlow.after)}**`, '', text(node.help.exampleFlow.explanation), '');
+      if (node.help.technicalNotes?.length) nodeLines.push('## What happens at run time', '', ...node.help.technicalNotes.map((note) => `- ${text(note)}`), '');
+      if (node.help.tips?.length) nodeLines.push('## Practical notes', '', ...node.help.tips.map((tip) => `- ${text(tip)}`), '');
     }
+    automationNodeDocuments.set(`${categorySlugs[category]}/${automationNodeSlug(node)}`, nodeLines.join('\n'));
   }
-  automationCategoryDocuments.set(categorySlugs[category], categoryLines.join('\n'));
 }
+
+const automationSidebarSource = `import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';\n\nconst generatedAutomationNodeSidebars: SidebarsConfig = ${JSON.stringify({automationNodes: automationSidebarCategories}, null, 2)};\n\nexport default generatedAutomationNodeSidebars.automationNodes;\n`;
 
 mkdirSync(resolve(docsRoot, 'docs/canvas'), {recursive: true});
 mkdirSync(resolve(docsRoot, 'docs/automation'), {recursive: true});
 mkdirSync(resolve(docsRoot, 'docs/automation/nodes'), {recursive: true});
 writeFileSync(resolve(docsRoot, 'docs/canvas/models.md'), modelLines.join('\n'));
-writeFileSync(resolve(docsRoot, 'docs/automation/node-reference.md'), automationIndexLines.join('\n'));
-for (const [slug, document] of automationCategoryDocuments) writeFileSync(resolve(docsRoot, `docs/automation/nodes/${slug}.md`), document);
+writeFileSync(resolve(docsRoot, 'docs/automation/nodes.md'), automationIndexLines.join('\n'));
+rmSync(resolve(docsRoot, 'docs/automation/node-reference.md'), {force: true});
+for (const entry of readdirSync(resolve(docsRoot, 'docs/automation/nodes'), {withFileTypes: true})) {
+  if (entry.isDirectory() || entry.name.endsWith('.md')) rmSync(resolve(docsRoot, 'docs/automation/nodes', entry.name), {recursive: true, force: true});
+}
+for (const [slug, document] of automationNodeDocuments) {
+  const destination = resolve(docsRoot, `docs/automation/nodes/${slug}.md`);
+  mkdirSync(resolve(docsRoot, `docs/automation/nodes/${slug.split('/')[0]}`), {recursive: true});
+  writeFileSync(destination, document);
+}
+writeFileSync(resolve(docsRoot, 'automation-node-sidebars.ts'), automationSidebarSource);
 
 const serverSource = readFileSync(resolve(coreRoot, 'src/lib/mcp/server.ts'), 'utf8');
 const registeredTools = [...serverSource.matchAll(/server\.registerTool\("([^"]+)"/g)].map((match) => match[1]);
@@ -363,6 +402,12 @@ writeFileSync(resolve(docsRoot, 'product-reference/snapshot.json'), JSON.stringi
     assistantModels: sourceHash('src/lib/assistant-models.ts'),
     automationRegistry: sourceHash('src/lib/automation-workflows/registry.ts'),
     mcpServer: sourceHash('src/lib/mcp/server.ts'),
+    selfhostEnvironment: sourceHash('deploy/selfhost/.env.example'),
+    selfhostLauncher: sourceHash('scenelith'),
+    selfhostCompose: sourceHash('deploy/selfhost/compose.yaml'),
+    sharedRuntimeCompose: sourceHash('deploy/compose/runtime.yaml'),
+    selfhostInstaller: sourceHash('install.sh'),
+    selfhostProviders: sourceHash('config/runtime-providers.json'),
   },
   generatedAt: new Date().toISOString(),
   canvasNodeKinds,
@@ -371,6 +416,12 @@ writeFileSync(resolve(docsRoot, 'product-reference/snapshot.json'), JSON.stringi
   generationPricingCases: generationPricingCases.length,
   automationNodes: automationNodes.map((node) => `${node.type}@${node.version}`),
   automationNodePages,
+  selfHosting: {
+    environmentVariables: selfhostEnvironmentVariables,
+    launcherCommands: selfhostLauncherCommands,
+    services: selfhostServices,
+    providers: selfhostProviderManifest.map((provider) => provider.name),
+  },
   canvasNodePages: {
     source: ['canvas/nodes/tiktok-post.md', 'canvas/nodes/video-source.md'],
     scene: ['canvas/nodes/scene-media.md'],

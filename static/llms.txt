@@ -44,14 +44,32 @@ Scenelith is a visual AI production workspace. This file is the compact document
 - [Workflow settings and limits](https://docs.scenelith.com/automation/workflow-settings): Runtime budget, parallelism, overlap behavior and graph limits for an Automation workflow.
 - [Deployment bindings and credentials](https://docs.scenelith.com/automation/deployment-and-credentials): Connect portable workflow slots to local credentials and published child workflows without exposing secrets.
 - [Portability, history and fixtures](https://docs.scenelith.com/automation/portability-and-fixtures): Export/import workflows, restore immutable versions and preview one node from pinned test data.
-- [Automation node reference](https://docs.scenelith.com/automation/node-reference): Browse every current Automation node by category and open its complete versioned contract.
-- [Trigger nodes](https://docs.scenelith.com/automation/nodes/triggers): Complete inputs, outputs, settings and runtime guidance for the current nodes in Triggers.
-- [Input nodes](https://docs.scenelith.com/automation/nodes/inputs): Complete inputs, outputs, settings and runtime guidance for the current nodes in Inputs.
-- [AI nodes](https://docs.scenelith.com/automation/nodes/ai): Complete inputs, outputs, settings and runtime guidance for the current nodes in AI.
-- [Logic nodes](https://docs.scenelith.com/automation/nodes/logic): Complete inputs, outputs, settings and runtime guidance for the current nodes in Logic.
-- [Integration nodes](https://docs.scenelith.com/automation/nodes/integrations): Complete inputs, outputs, settings and runtime guidance for the current nodes in Integrations.
-- [Generation nodes](https://docs.scenelith.com/automation/nodes/generation): Complete inputs, outputs, settings and runtime guidance for the current nodes in Generation.
-- [Output nodes](https://docs.scenelith.com/automation/nodes/outputs): Complete inputs, outputs, settings and runtime guidance for the current nodes in Outputs.
+- [Automation nodes](https://docs.scenelith.com/automation/nodes): Every current Automation node, with its settings, connections, runtime behavior and practical use.
+- [Start workflow](https://docs.scenelith.com/automation/nodes/triggers/core-manual-trigger): Starts one workflow run from the Automation panel or a configured trigger. Complete settings, connections, runtime behavior and usage guidance.
+- [TikTok source](https://docs.scenelith.com/automation/nodes/inputs/input-tiktok-source): Brings the chosen TikTok slideshow and an explicitly selected caption mode into the workflow. Complete settings, connections, runtime behavior and usage guidance.
+- [Identity](https://docs.scenelith.com/automation/nodes/inputs/input-identity): Gives later steps the selected saved person or character and requires usable images when one is chosen. Complete settings, connections, runtime behavior and usage guidance.
+- [Visual references](https://docs.scenelith.com/automation/nodes/inputs/input-visual-references): Brings chosen Canvas, Library or Identity images into the workflow as reusable visual context. Complete settings, connections, runtime behavior and usage guidance.
+- [TikTok recreation choices](https://docs.scenelith.com/automation/nodes/inputs/input-creative-settings): Collects the six explicit decisions used by the Recreate TikTok workflow. Complete settings, connections, runtime behavior and usage guidance.
+- [Input from another workflow](https://docs.scenelith.com/automation/nodes/inputs/input-workflow-data): Receives information from a trigger or another workflow. Complete settings, connections, runtime behavior and usage guidance.
+- [AI](https://docs.scenelith.com/automation/nodes/ai/ai-structured-task): Runs one named AI task and returns either readable text or defined data fields. Complete settings, connections, runtime behavior and usage guidance.
+- [Interpret creative direction](https://docs.scenelith.com/automation/nodes/ai/ai-interpret-creative-direction): Classifies only the current path-explicit request and returns exact evidence spans under visible instructions. Complete settings, connections, runtime behavior and usage guidance.
+- [Prepare information](https://docs.scenelith.com/automation/nodes/logic/logic-transform): Renames, selects or combines incoming information for the next step. Complete settings, connections, runtime behavior and usage guidance.
+- [Continue one path](https://docs.scenelith.com/automation/nodes/logic/logic-select-one): Joins mutually exclusive paths and passes the one completed value forward unchanged. Complete settings, connections, runtime behavior and usage guidance.
+- [Retry gate](https://docs.scenelith.com/automation/nodes/logic/logic-retry-gate): Returns corrected information to a check through one explicit bounded retry route. Complete settings, connections, runtime behavior and usage guidance.
+- [Select information](https://docs.scenelith.com/automation/nodes/logic/logic-select-path): Takes one existing field from incoming information and passes its value forward unchanged. Complete settings, connections, runtime behavior and usage guidance.
+- [Choose a path](https://docs.scenelith.com/automation/nodes/logic/logic-condition): Checks one explicit JSON-typed rule without silently converting text, numbers or booleans. Complete settings, connections, runtime behavior and usage guidance.
+- [Prepare creative direction](https://docs.scenelith.com/automation/nodes/logic/logic-prepare-creative-direction): Creates a path-explicit typed request that defines exactly what the interpreter and resolver may read or write. Complete settings, connections, runtime behavior and usage guidance.
+- [Resolve creative direction](https://docs.scenelith.com/automation/nodes/logic/logic-resolve-creative-direction): Verifies the current request, changes only configured choices and writes evidence only to its configured destination. Complete settings, connections, runtime behavior and usage guidance.
+- [Limit the amount](https://docs.scenelith.com/automation/nodes/logic/logic-limit-batch): Stops an unexpectedly large list before it reaches expensive or slow steps. Complete settings, connections, runtime behavior and usage guidance.
+- [Merge paths](https://docs.scenelith.com/automation/nodes/logic/logic-merge): Waits for connected paths and creates one clear list or named object for the next step. Complete settings, connections, runtime behavior and usage guidance.
+- [Run another workflow](https://docs.scenelith.com/automation/nodes/logic/logic-run-subworkflow): Hands information to another runnable workflow, waits for it, then continues with its result. Complete settings, connections, runtime behavior and usage guidance.
+- [For each item](https://docs.scenelith.com/automation/nodes/logic/logic-map-subworkflow): Runs one reusable workflow for every item in a bounded list, then exposes the collected results and failures. Complete settings, connections, runtime behavior and usage guidance.
+- [Validate Recreate TikTok plans](https://docs.scenelith.com/automation/nodes/logic/logic-validate-slide-plans): Checks every plan against the explicit Recreate TikTok v1 contract before images are created. Complete settings, connections, runtime behavior and usage guidance.
+- [Prepare slideshow image requests](https://docs.scenelith.com/automation/nodes/logic/logic-prepare-slideshow-image-requests): Converts checked TikTok slide plans into exact generic image requests without changing their prompts. Complete settings, connections, runtime behavior and usage guidance.
+- [Connect an external service](https://docs.scenelith.com/automation/nodes/integrations/integration-http-request): Sends information to an external app or API and passes its answer to the next step. Complete settings, connections, runtime behavior and usage guidance.
+- [Image Generator](https://docs.scenelith.com/automation/nodes/generation/generation-image): Creates images from exact prompts and reference roles prepared by connected workflow nodes. Complete settings, connections, runtime behavior and usage guidance.
+- [Add slideshow to canvas](https://docs.scenelith.com/automation/nodes/outputs/output-add-to-canvas): Places canonical generated-image results on the content canvas and preserves the complete plan without silent truncation. Complete settings, connections, runtime behavior and usage guidance.
+- [Finish without adding to canvas](https://docs.scenelith.com/automation/nodes/outputs/output-finish): Ends this path and reports its result without creating new canvas nodes. Complete settings, connections, runtime behavior and usage guidance.
 - [Runs, versions and triggers](https://docs.scenelith.com/automation/runs-and-triggers): Drafts, immutable versions, retries, cancellation and event delivery.
 
 ## Cloud
@@ -75,7 +93,11 @@ Scenelith is a visual AI production workspace. This file is the compact document
 
 ## Self-hosting
 
-- [Self-hosting overview](https://docs.scenelith.com/self-hosting/overview): Install and operate the complete Scenelith runtime on infrastructure you control.
+- [Self-hosting overview](https://docs.scenelith.com/self-hosting/overview): What the complete public Scenelith distribution includes, owns and deliberately leaves to the operator.
+- [Installation and first run](https://docs.scenelith.com/self-hosting/installation): Requirements, verified installation, provider setup and creation of the first self-hosted owner.
+- [Configuration reference](https://docs.scenelith.com/self-hosting/configuration): Every setting shipped in the self-hosted environment template, including secrets, retention, networking, providers and storage.
 - [Providers, accounts and storage](https://docs.scenelith.com/self-hosting/providers-and-storage): Bring-your-own providers, registration boundary and local/S3 media storage.
+- [Operations and diagnostics](https://docs.scenelith.com/self-hosting/operations): Complete launcher command reference, health checks, service layout and safe day-to-day operations.
 - [Backup, update and restore](https://docs.scenelith.com/self-hosting/backup-and-update): Verified release updates, rollback and explicit disaster recovery.
 - [Public URL and HTTPS](https://docs.scenelith.com/self-hosting/public-url): Point a domain at a self-hosted Scenelith instance and enable automatic HTTPS and remote MCP.
+- [Runtime architecture and boundaries](https://docs.scenelith.com/self-hosting/runtime-architecture): How the public self-hosted release is packaged, isolated and kept aligned with the shared Scenelith core.
