@@ -33,8 +33,8 @@ if (!failures.length) {
   if (/<\/?(?:section|div|span|h1|p|strong|a|br)\b/i.test(full)) failures.push('llms-full-html-markup');
   if (!full.includes('claude mcp add --transport http scenelith https://scenelith.com/api/mcp')) failures.push('llms-full-agent-setup');
   const config = readFileSync(resolve(root, 'docusaurus.config.ts'), 'utf8');
-  if (!config.includes("label: 'LLMs.txt'")) failures.push('footer-llms-index');
-  if (!config.includes("label: 'Download full docs (.txt)'")) failures.push('footer-llms-full');
+  if (!config.includes("label: 'AI-readable docs'")) failures.push('footer-llms-index');
+  if ((config.match(/llms-full\.txt/g) || []).length > 0) failures.push('footer-duplicate-llms-link');
 }
 
 if (failures.length) {

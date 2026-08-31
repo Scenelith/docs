@@ -88,7 +88,14 @@ const pages = new Map(walk(docsRoot).map((file) => {
 }));
 
 const sidebarSource = readFileSync(resolve(root, 'sidebars.ts'), 'utf8');
-const orderedIds = [...sidebarSource.matchAll(/'([^']+)'/g)].map((match) => match[1]).filter((id) => pages.has(id));
+const generatedAutomationSidebar = readFileSync(resolve(root, 'automation-node-sidebars.ts'), 'utf8');
+const staticIds = [...sidebarSource.matchAll(/'([^']+)'/g)].map((match) => match[1]);
+const generatedIds = [...generatedAutomationSidebar.matchAll(/"([^"]+)"/g)].map((match) => match[1]);
+const automationInsertIndex = staticIds.indexOf('automation/nodes') + 1;
+const sidebarIds = automationInsertIndex > 0
+  ? [...staticIds.slice(0, automationInsertIndex), ...generatedIds, ...staticIds.slice(automationInsertIndex)]
+  : [...staticIds, ...generatedIds];
+const orderedIds = sidebarIds.filter((id) => pages.has(id));
 const missingFromSidebar = [...pages.keys()].filter((id) => !orderedIds.includes(id));
 if (missingFromSidebar.length) throw new Error(`Documentation pages missing from the sidebar: ${missingFromSidebar.join(', ')}`);
 if (new Set(orderedIds).size !== orderedIds.length) throw new Error('The sidebar contains duplicate documentation routes');

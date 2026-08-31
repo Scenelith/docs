@@ -99,8 +99,7 @@ const config: Config = {
         {
           title: 'For AI agents',
           items: [
-            {label: 'LLMs.txt', href: 'https://docs.scenelith.com/llms.txt'},
-            {label: 'Download full docs (.txt)', href: 'https://docs.scenelith.com/llms-full.txt'},
+            {label: 'AI-readable docs', href: 'https://docs.scenelith.com/llms.txt'},
           ],
         },
       ],
@@ -112,7 +111,7 @@ const config: Config = {
       additionalLanguages: ['bash', 'json'],
     },
     metadata: [
-      {name: 'theme-color', content: '#0b0b0c'},
+      {name: 'theme-color', content: '#101312'},
       {name: 'description', content: 'Documentation for Scenelith Canvas, Automation, MCP and self-hosting.'},
     ],
   } satisfies Preset.ThemeConfig,
