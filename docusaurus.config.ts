@@ -10,7 +10,7 @@ const config: Config = {
   baseUrl: '/',
   trailingSlash: false,
   organizationName: 'Scenelith',
-  projectName: 'scenelith',
+  projectName: 'docs',
   onBrokenLinks: 'throw',
   markdown: {
     hooks: {
@@ -28,7 +28,7 @@ const config: Config = {
         docs: {
           routeBasePath: '/',
           sidebarPath: './sidebars.ts',
-          editUrl: 'https://github.com/Scenelith/scenelith/edit/main/docs-site/',
+          editUrl: 'https://github.com/Scenelith/docs/edit/main/',
           showLastUpdateAuthor: false,
           showLastUpdateTime: false,
         },
@@ -105,7 +105,7 @@ const config: Config = {
       additionalLanguages: ['bash', 'json'],
     },
     metadata: [
-      {name: 'theme-color', content: '#0b0c0d'},
+      {name: 'theme-color', content: '#0b0b0c'},
       {name: 'description', content: 'Documentation for Scenelith Canvas, Automation, MCP and self-hosting.'},
     ],
   } satisfies Preset.ThemeConfig,

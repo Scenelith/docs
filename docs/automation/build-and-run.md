@@ -19,6 +19,8 @@ Connections are permitted only when the source and destination port types are co
 
 For values that should change on every run, enable **Ask on run** in the node settings. Keep permanent brand, safety and formatting instructions inside the node.
 
+Review the [workflow execution policy and limits](/automation/workflow-settings) when the workflow can generate many assets, call child workflows or receive overlapping automatic starts.
+
 ## 4. Validate
 
 Validation checks required fields, port compatibility, reachable paths, run-input bindings and deployment requirements. Resolve blocking errors before publishing.

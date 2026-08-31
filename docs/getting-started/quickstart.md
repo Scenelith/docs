@@ -36,7 +36,7 @@ Open the generator, choose a compatible model, describe the change, and run it. 
 When the result is repeatable, either:
 
 - turn the sequence into an [Automation](/automation/overview);
-- save visual evidence as an [Identity](/canvas/library-and-identities);
+- save visual evidence as an [Identity](/canvas/identities);
 - or [connect an AI agent](/mcp/connect) and let it work through the same project boundaries.
 
 ## Next

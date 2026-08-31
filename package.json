@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "start": "docusaurus start",
-    "build": "docusaurus build",
+    "build": "npm run check:product-coverage && docusaurus build",
     "serve": "docusaurus serve --host 0.0.0.0",
     "clear": "docusaurus clear",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "sync:product-reference": "node scripts/sync-product-reference.mjs",
+    "check:product-coverage": "node scripts/check-product-coverage.mjs"
   },
   "devDependencies": {
     "@docusaurus/core": "3.10.2",
