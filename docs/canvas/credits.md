@@ -72,4 +72,4 @@ Purchased credit packs first repay any credit debt; only the remainder becomes s
 
 ## Assistant cost
 
-Gemini 3.7 Flash is included in Cloud. Other Assistant models are metered from the provider-reported cost, multiplied by the Cloud markup and converted to whole credits. The final charge comes from the provider response, not only the pre-run token estimate.
+Gemini 3.7 Flash is included in Cloud. Other Assistant models are metered from the provider-reported cost. The current conversion is `ceil(provider USD × 1.7 ÷ (39 / 4,000))` credits. The final charge comes from the provider response, not only the pre-run token estimate.

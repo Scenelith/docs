@@ -15,7 +15,7 @@ In Scenelith Cloud, sign in at [scenelith.com](https://scenelith.com). On a self
 
 ## 2. Add source material
 
-You can upload image or video files, import a public TikTok post, or start with an empty generator node. Imported and uploaded media is also available through the project Library.
+You can upload image or video files directly to the Canvas, import a public TikTok post, or start with an empty Generator node. Direct Canvas uploads and imported source media remain project assets but are not automatically listed in Library. Use **Library → Add media** when the file should be reusable from the Library browser; completed generation outputs are added there automatically.
 
 ## 3. Add visual references
 

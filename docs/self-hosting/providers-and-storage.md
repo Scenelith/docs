@@ -17,6 +17,8 @@ The stack starts without Kie/OpenRouter keys; only their capabilities remain una
 
 Run `./scenelith doctor` to validate the Compose model, provider presence, storage and disk without printing secrets. `--strict-providers` requires both paid providers; `--json` produces automation-friendly output.
 
+The installer also generates `AUTOMATION_CREDENTIAL_ENCRYPTION_KEY` for saved Automation HTTP credentials. Preserve that value in a separate encrypted secret backup: the normal Scenelith backup intentionally does not copy `.env`, and a restored database cannot decrypt those credentials without the matching key.
+
 ## Local accounts
 
 The first registered account becomes instance owner/admin. Public registration then closes by default. Set `SCENELITH_REGISTRATION_MODE=open` only when independent local accounts are intentional; each owns a separate workspace.

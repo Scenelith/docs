@@ -19,6 +19,8 @@ Assistant is a Canvas node for understanding media and producing text or structu
 
 All Assistant models except GLM 5.2 currently accept visual input. If a selected model cannot see images, the visual context is not a valid substitute for textual instructions.
 
+Current request limits are 10,000 characters for the instruction, 20,000 for connected text, 10,000 for the system prompt and 14 distinct images. The browser endpoint accepts up to 30 Assistant requests per user per minute.
+
 ## Running the node
 
 1. Write one clear job.

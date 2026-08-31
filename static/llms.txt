@@ -1,0 +1,81 @@
+# Scenelith
+
+> Scenelith documentation for Canvas, Automation, MCP, Cloud and self-hosting.
+
+Scenelith is a visual AI production workspace. This file is the compact documentation index for language models and agents.
+
+## Complete documentation
+
+- [Download all Scenelith documentation as one TXT file](https://docs.scenelith.com/llms-full.txt): Full content of every published documentation page in sidebar order.
+
+## Getting started
+
+- [Scenelith documentation](https://docs.scenelith.com/): Build visual AI projects, reusable identities and production automations in Scenelith.
+- [Quick start](https://docs.scenelith.com/getting-started/quickstart): Create a project, add visual context and generate your first result in Scenelith.
+- [Core concepts](https://docs.scenelith.com/getting-started/core-concepts): The project, asset, identity and workflow boundaries used throughout Scenelith.
+
+## Canvas
+
+- [Canvas overview](https://docs.scenelith.com/canvas/overview): How Scenelith keeps source media, references, generations and edits connected.
+- [Create, switch and move Canvases](https://docs.scenelith.com/canvas/canvas-management): Canvas ownership, naming, switching and portable .scenelith.json import/export.
+- [Canvas node reference](https://docs.scenelith.com/canvas/nodes): Browse every user-visible Canvas node, its internal kind, creation path and typed output.
+- [TikTok post node](https://docs.scenelith.com/canvas/nodes/tiktok-post): Imported post metadata, slideshow lineage, statistics refresh and downstream media.
+- [Video source node](https://docs.scenelith.com/canvas/nodes/video-source): Full imported video, detected and editable cuts, scene outputs and replacement media.
+- [Scene and media node](https://docs.scenelith.com/canvas/nodes/scene-media): Canvas images and videos created by imports, uploads, Library placement, frame capture and materialization.
+- [Identity node](https://docs.scenelith.com/canvas/nodes/identity): Ordered Character or Before/After evidence placed on the Canvas.
+- [Hook node](https://docs.scenelith.com/canvas/nodes/hook): Saved hook text placed on Canvas as explicit text context.
+- [Generator node](https://docs.scenelith.com/canvas/nodes/generator): Image and video generation settings, semantic inputs, output history and cost behavior.
+- [Assistant node](https://docs.scenelith.com/canvas/nodes/assistant): Text-model tasks, system instructions, connected context and reusable output.
+- [Generated output node](https://docs.scenelith.com/canvas/nodes/generated-output): Compatibility behavior for explicit generated-media branches and older saved canvases.
+- [Video Master node](https://docs.scenelith.com/canvas/nodes/video-master): Ordered scene editing, source/output lanes, per-scene generation and export.
+- [Note node](https://docs.scenelith.com/canvas/nodes/note): Freeform Canvas annotation behavior, colors and non-executable semantics.
+- [Models](https://docs.scenelith.com/canvas/models): Every image, video and Assistant model currently exposed by Scenelith.
+- [Credits and generation cost](https://docs.scenelith.com/canvas/credits): How Cloud credits are estimated, reserved, settled and refunded.
+- [Assistant](https://docs.scenelith.com/canvas/assistant): Build prompts and analyze connected Canvas context with a selectable text model.
+- [TikTok import and video scenes](https://docs.scenelith.com/canvas/tiktok-import): What Scenelith stores for slideshows and video posts, and how video cuts remain editable.
+- [Hooks](https://docs.scenelith.com/canvas/hooks): Save, extract, search and generate hook variants without losing the source.
+- [Library](https://docs.scenelith.com/canvas/library): Durable project media, uploads, generated outputs and Canvas placement.
+- [Identities](https://docs.scenelith.com/canvas/identities): Character and Before/After reference groups, ordering and generation use.
+
+## Automation
+
+- [Automation overview](https://docs.scenelith.com/automation/overview): Build typed visual workflows with inspectable inputs, outputs and durable run history.
+- [Build and run a workflow](https://docs.scenelith.com/automation/build-and-run): Create, validate, publish and inspect a Scenelith Automation.
+- [Workflow settings and limits](https://docs.scenelith.com/automation/workflow-settings): Runtime budget, parallelism, overlap behavior and graph limits for an Automation workflow.
+- [Deployment bindings and credentials](https://docs.scenelith.com/automation/deployment-and-credentials): Connect portable workflow slots to local credentials and published child workflows without exposing secrets.
+- [Portability, history and fixtures](https://docs.scenelith.com/automation/portability-and-fixtures): Export/import workflows, restore immutable versions and preview one node from pinned test data.
+- [Automation node reference](https://docs.scenelith.com/automation/node-reference): Browse every current Automation node by category and open its complete versioned contract.
+- [Trigger nodes](https://docs.scenelith.com/automation/nodes/triggers): Complete inputs, outputs, settings and runtime guidance for the current nodes in Triggers.
+- [Input nodes](https://docs.scenelith.com/automation/nodes/inputs): Complete inputs, outputs, settings and runtime guidance for the current nodes in Inputs.
+- [AI nodes](https://docs.scenelith.com/automation/nodes/ai): Complete inputs, outputs, settings and runtime guidance for the current nodes in AI.
+- [Logic nodes](https://docs.scenelith.com/automation/nodes/logic): Complete inputs, outputs, settings and runtime guidance for the current nodes in Logic.
+- [Integration nodes](https://docs.scenelith.com/automation/nodes/integrations): Complete inputs, outputs, settings and runtime guidance for the current nodes in Integrations.
+- [Generation nodes](https://docs.scenelith.com/automation/nodes/generation): Complete inputs, outputs, settings and runtime guidance for the current nodes in Generation.
+- [Output nodes](https://docs.scenelith.com/automation/nodes/outputs): Complete inputs, outputs, settings and runtime guidance for the current nodes in Outputs.
+- [Runs, versions and triggers](https://docs.scenelith.com/automation/runs-and-triggers): Drafts, immutable versions, retries, cancellation and event delivery.
+
+## Cloud
+
+- [Plans and credit balance](https://docs.scenelith.com/cloud/plans-and-credits): Cloud plan allowances, concurrency and purchased-credit behavior.
+- [Team access](https://docs.scenelith.com/cloud/team-access): Studio seats, invitations and exact project/Canvas grants.
+- [Notifications and tasks](https://docs.scenelith.com/cloud/notifications-and-tasks): Track replies, roadmap updates, generations and Automation work.
+- [Support](https://docs.scenelith.com/cloud/support): Create a ticket, continue the thread and understand its state.
+- [Feature board](https://docs.scenelith.com/cloud/feature-board): Submit ideas, follow moderation and vote on approved requests.
+
+## MCP
+
+- [Connect an AI agent](https://docs.scenelith.com/mcp/connect): Connect Codex, Claude, ChatGPT or another MCP client to Scenelith with OAuth—no API key required.
+- [Permissions and project access](https://docs.scenelith.com/mcp/permissions): Control which Scenelith workspaces, projects, Library assets and actions an MCP agent can use.
+- [Tool domains](https://docs.scenelith.com/mcp/tool-domains): How Scenelith organizes Canvas, Library, Identity and Automation tools for AI agents.
+- [Canvas tools](https://docs.scenelith.com/mcp/canvas-tools): Safe read-before-write flows for nodes, connections, media, Assistant and generation.
+- [Library and Identity tools](https://docs.scenelith.com/mcp/library-identity-tools): Inspect visual evidence, place assets and maintain separated Identity groups.
+- [Automation tools](https://docs.scenelith.com/mcp/automation-tools): Discover, edit, validate, publish, run and recover workflows through MCP.
+- [Complete MCP tool reference](https://docs.scenelith.com/mcp/tool-reference): Every current Scenelith MCP tool, grouped by product domain.
+- [Troubleshooting MCP](https://docs.scenelith.com/mcp/troubleshooting): Resolve Scenelith MCP discovery, authorization and access problems.
+
+## Self-hosting
+
+- [Self-hosting overview](https://docs.scenelith.com/self-hosting/overview): Install and operate the complete Scenelith runtime on infrastructure you control.
+- [Providers, accounts and storage](https://docs.scenelith.com/self-hosting/providers-and-storage): Bring-your-own providers, registration boundary and local/S3 media storage.
+- [Backup, update and restore](https://docs.scenelith.com/self-hosting/backup-and-update): Verified release updates, rollback and explicit disaster recovery.
+- [Public URL and HTTPS](https://docs.scenelith.com/self-hosting/public-url): Point a domain at a self-hosted Scenelith instance and enable automatic HTTPS and remote MCP.

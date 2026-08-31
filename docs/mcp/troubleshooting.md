@@ -28,7 +28,7 @@ That page is served by the desktop MCP client's temporary loopback listener, not
 
 ## The agent cannot see Library assets
 
-Reconnect or edit the connection and enable **Library access**. General read access alone does not include Library media.
+Revoke the existing connection under **Profile → MCP → Manage connected agents**, then reconnect and enable **Library access** on the new consent screen. General read access alone does not include Library media; an existing connection cannot be widened in place.
 
 Also confirm the asset belongs to one of the projects selected on the consent screen.
 
