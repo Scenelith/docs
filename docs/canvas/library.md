@@ -5,7 +5,7 @@ description: Durable project media, uploads, generated outputs and Canvas placem
 
 # Library
 
-Library is the durable media layer for accessible Canvases. It combines explicit Library uploads and generated image/video outputs. Imported source media remains project media but is surfaced only where the Library query and access policy allow it.
+Library is the reusable media browser for accessible Canvases. It contains explicit Library uploads and generated image/video outputs. TikTok imports and direct Canvas uploads remain durable project media, but they are not returned by the Library list unless a separate Library asset is created.
 
 ## Scope
 
@@ -38,4 +38,4 @@ From a generated image you can also create an Identity or add the image to an ex
 
 ## MCP
 
-Agents can list with a cursor, inspect a single asset, upload a data/remote asset when permitted, place it on a Canvas, or attach/detach it as a Generator/Video Master reference. The asset ID and Canvas node ID are different objects and must not be interchanged.
+Agents can list with a cursor, inspect a single asset, upload bounded base64-encoded media when permitted, place it on a Canvas, or attach/detach it as a Generator/Video Master reference. MCP rejects arbitrary server paths and remote URLs. The asset ID and Canvas node ID are different objects and must not be interchanged.

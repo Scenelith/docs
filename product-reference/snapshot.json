@@ -1,6 +1,15 @@
 {
-  "coreRevision": "8c2b183f92fa11e34856c21a2a1ff2da65e7be0b",
-  "generatedAt": "2026-08-31T06:12:52.112Z",
+  "coreRevision": "09f49522970f7593cbcaccea44e06eb5948f82eb",
+  "coreDirty": false,
+  "sourceHashes": {
+    "canvasContract": "fec8d074f019838b9d2bdff897c042e7b7aceea0ac9c695868346ba7815b3af4",
+    "generationModels": "7842b99b7528ea89688f8ff5f6852354821b697592a6b8f79bc6ac4e626f4636",
+    "generationPricing": "37ba0214083bb7085026ff082b1d9075216ab7597aa454c9f28b697ece143abf",
+    "assistantModels": "f738c6cbf6cf5104c829c835764679482b509933b63cf1f5da692152e1a2ff64",
+    "automationRegistry": "4d5d1540975274d2a232642d786fb5c721da57a3a11151452aff9977ed1282c6",
+    "mcpServer": "0d4035304ca29198f53e32f648eda5f199f252a93b1e3c10c92c41a2781a0b40"
+  },
+  "generatedAt": "2026-08-31T08:11:41.647Z",
   "canvasNodeKinds": [
     "source",
     "scene",
@@ -51,6 +60,7 @@
     "anthropic/claude-sonnet-5",
     "z-ai/glm-5.2"
   ],
+  "generationPricingCases": 71,
   "automationNodes": [
     "core.manual-trigger@1",
     "input.tiktok-source@2",
@@ -78,6 +88,63 @@
     "output.add-to-canvas@3",
     "output.finish@1"
   ],
+  "automationNodePages": {
+    "core.manual-trigger@1": "automation/nodes/triggers.md",
+    "input.tiktok-source@2": "automation/nodes/inputs.md",
+    "input.identity@2": "automation/nodes/inputs.md",
+    "input.visual-references@1": "automation/nodes/inputs.md",
+    "input.creative-settings@1": "automation/nodes/inputs.md",
+    "input.workflow-data@1": "automation/nodes/inputs.md",
+    "ai.structured-task@2": "automation/nodes/ai.md",
+    "ai.interpret-creative-direction@3": "automation/nodes/ai.md",
+    "logic.transform@1": "automation/nodes/logic.md",
+    "logic.select-one@1": "automation/nodes/logic.md",
+    "logic.retry-gate@1": "automation/nodes/logic.md",
+    "logic.select-path@1": "automation/nodes/logic.md",
+    "logic.condition@3": "automation/nodes/logic.md",
+    "logic.prepare-creative-direction@3": "automation/nodes/logic.md",
+    "logic.resolve-creative-direction@4": "automation/nodes/logic.md",
+    "logic.limit-batch@1": "automation/nodes/logic.md",
+    "logic.merge@1": "automation/nodes/logic.md",
+    "logic.run-subworkflow@1": "automation/nodes/logic.md",
+    "logic.map-subworkflow@1": "automation/nodes/logic.md",
+    "logic.validate-slide-plans@2": "automation/nodes/logic.md",
+    "logic.prepare-slideshow-image-requests@1": "automation/nodes/logic.md",
+    "integration.http-request@1": "automation/nodes/integrations.md",
+    "generation.image@2": "automation/nodes/generation.md",
+    "output.add-to-canvas@3": "automation/nodes/outputs.md",
+    "output.finish@1": "automation/nodes/outputs.md"
+  },
+  "canvasNodePages": {
+    "source": [
+      "canvas/nodes/tiktok-post.md",
+      "canvas/nodes/video-source.md"
+    ],
+    "scene": [
+      "canvas/nodes/scene-media.md"
+    ],
+    "persona": [
+      "canvas/nodes/identity.md"
+    ],
+    "hook": [
+      "canvas/nodes/hook.md"
+    ],
+    "prompt": [
+      "canvas/nodes/generator.md"
+    ],
+    "assistant": [
+      "canvas/nodes/assistant.md"
+    ],
+    "generation": [
+      "canvas/nodes/generated-output.md"
+    ],
+    "videoMaster": [
+      "canvas/nodes/video-master.md"
+    ],
+    "note": [
+      "canvas/nodes/note.md"
+    ]
+  },
   "mcpTools": [
     "list_workspaces",
     "list_canvases",

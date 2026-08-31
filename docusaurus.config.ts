@@ -96,6 +96,13 @@ const config: Config = {
             {label: 'Scenelith Cloud', href: 'https://scenelith.com'},
           ],
         },
+        {
+          title: 'For AI agents',
+          items: [
+            {label: 'LLMs.txt', href: 'https://docs.scenelith.com/llms.txt'},
+            {label: 'Download full docs (.txt)', href: 'https://docs.scenelith.com/llms-full.txt'},
+          ],
+        },
       ],
       copyright: `Scenelith · ${new Date().getFullYear()}`,
     },

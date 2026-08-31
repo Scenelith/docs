@@ -469,6 +469,9 @@ table tr:nth-child(2n) { background: rgba(255, 255, 255, 0.012); }
 }
 
 @media (max-width: 996px) {
+  /* backdrop-filter creates a containing block for Docusaurus' fixed mobile
+     sidebar, constraining it to the navbar height instead of the viewport. */
+  .navbar { backdrop-filter: none; -webkit-backdrop-filter: none; }
   .navbar__items--right .navbar__link:not(.navbar__item--app) { display: none; }
   .docs-hero { padding: 48px 32px; }
   .docs-hero h1 { max-width: 610px; }

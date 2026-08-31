@@ -3,12 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "prestart": "npm run sync:llms",
     "start": "docusaurus start",
-    "build": "npm run check:product-coverage && docusaurus build",
+    "prebuild": "npm run sync:llms",
+    "build": "npm run check:product-coverage && npm run check:llms && docusaurus build",
     "serve": "docusaurus serve --host 0.0.0.0",
     "clear": "docusaurus clear",
     "typecheck": "tsc --noEmit",
     "sync:product-reference": "node scripts/sync-product-reference.mjs",
+    "sync:llms": "node scripts/generate-llms.mjs",
+    "check:llms": "node scripts/check-llms.mjs",
     "check:product-coverage": "node scripts/check-product-coverage.mjs"
   },
   "devDependencies": {

@@ -11,7 +11,9 @@ description: Verified release updates, rollback and explicit disaster recovery.
 ./scenelith backup
 ```
 
-The launcher briefly quiesces application writers, creates a PostgreSQL custom-format dump, archives local media and records checksums plus release metadata. Provider keys are never copied. S3-compatible media remains in operator-owned object storage and needs its own versioning/snapshot policy.
+The launcher briefly quiesces application writers, creates a PostgreSQL custom-format dump, archives local media and records checksums plus release metadata. The deployment `.env` and its secrets are never copied. S3-compatible media remains in operator-owned object storage and needs its own versioning/snapshot policy.
+
+Keep a separate encrypted escrow of the environment values needed for recovery. In particular, a database restored on another host needs the original `AUTOMATION_CREDENTIAL_ENCRYPTION_KEY` (or matching key ring) to decrypt saved Automation credentials. Provider and storage credentials must also be restored separately; never place this secret copy inside an unencrypted application backup.
 
 Keep encrypted backups off the application host.
 
