@@ -1,0 +1,58 @@
+---
+id: intro
+title: Scenelith documentation
+slug: /
+sidebar_label: Overview
+hide_title: true
+description: Build visual AI projects, reusable identities and production automations in Scenelith.
+---
+
+<section className="docs-hero">
+  <span className="docs-eyebrow">SCENELITH · PRODUCT DOCUMENTATION</span>
+  <h1>One surface for the whole creative flow.</h1>
+  <p>Bring source material, references, prompts, generations and reusable identities together on a visual Canvas—then turn the work into a repeatable Automation or hand it to an AI agent through MCP.</p>
+  <div className="docs-hero__actions">
+    <a className="docs-button docs-button--primary" href="/getting-started/quickstart">Start with Scenelith</a>
+    <a className="docs-button" href="/mcp/connect">Connect an AI agent</a>
+  </div>
+</section>
+
+<div className="docs-paths">
+  <a href="/canvas/overview">
+    <span>01</span>
+    <strong>Canvas</strong>
+    <p>Keep media, references and every generated branch visible and editable.</p>
+  </a>
+  <a href="/automation/overview">
+    <span>02</span>
+    <strong>Automation</strong>
+    <p>Build typed, inspectable workflows and run them without hiding the logic.</p>
+  </a>
+  <a href="/mcp/connect">
+    <span>03</span>
+    <strong>MCP</strong>
+    <p>Authorize Codex, Claude, ChatGPT or another agent without creating API keys.</p>
+  </a>
+  <a href="/self-hosting/overview">
+    <span>04</span>
+    <strong>Self-hosting</strong>
+    <p>Run the complete product on your own server, storage and provider accounts.</p>
+  </a>
+</div>
+
+## Understand the object model
+
+Scenelith keeps four things deliberately separate:
+
+| Object | What it owns |
+| --- | --- |
+| **Canvas** | The visible project graph: source media, nodes, connections and editable outputs. |
+| **Library** | Durable uploaded, imported and generated image or video assets. |
+| **Identity** | Reusable visual evidence for one Character or separate Before and After groups. |
+| **Automation** | A typed workflow draft, immutable published versions, triggers and run history. |
+
+That same model is used by the interface and by MCP. An agent does not get a second, simplified version of the product.
+
+:::tip Choose your path
+Use **Scenelith Cloud** when you want a managed account and infrastructure. Use **self-hosted Scenelith** when you want the runtime, media storage and provider credentials on infrastructure you control.
+:::

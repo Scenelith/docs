@@ -1,0 +1,40 @@
+---
+title: Connect an AI agent
+description: Connect Codex, Claude, ChatGPT or another MCP client to Scenelith with OAuth—no API key required.
+---
+
+import AgentTabs from '@site/src/components/AgentTabs';
+
+# Connect an AI agent
+
+Scenelith exposes a remote Streamable HTTP MCP server. You paste one URL into a compatible client, sign in, and approve exactly what the agent may access. There is no API key or access token to copy.
+
+<AgentTabs />
+
+## Connect from Scenelith
+
+1. Open your profile menu.
+2. Choose **MCP**.
+3. Select your client and copy the server URL or command.
+4. Add it to the client.
+5. Complete authorization in the browser.
+
+The consent screen lets you choose the workspace, all projects or selected projects, optional Library visibility and individual write/run capabilities.
+
+## What happens during authorization
+
+1. The client discovers Scenelith's protected-resource and authorization metadata.
+2. It registers a secure HTTPS or loopback callback.
+3. Scenelith opens the consent screen.
+4. After approval, Scenelith returns a short-lived, single-use code bound to the client's PKCE challenge and exact MCP resource URL.
+5. The client exchanges the code and stores its own connection tokens.
+
+The browser callback belongs to the MCP client. A desktop client may briefly show a local “Authentication complete” page before closing or returning focus to the app.
+
+:::info Self-hosted URL
+Replace `https://scenelith.com` with the public HTTPS origin of your instance. A desktop client on the same machine can use loopback HTTP, but remote web agents require a publicly reachable HTTPS URL.
+:::
+
+## Revoke access
+
+Open **Settings → Connected agents** in Scenelith. Revoking either token revokes the whole connection immediately.
