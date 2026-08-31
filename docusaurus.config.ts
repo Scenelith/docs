@@ -5,7 +5,7 @@ import {themes as prismThemes} from 'prism-react-renderer';
 const config: Config = {
   title: 'Scenelith Docs',
   tagline: 'Build visual AI workflows that stay understandable.',
-  favicon: 'img/scenelith-mark.svg',
+  favicon: 'img/scenelith-mark-mono.svg',
   url: 'https://docs.scenelith.com',
   baseUrl: '/',
   trailingSlash: false,
@@ -41,7 +41,7 @@ const config: Config = {
     ],
   ],
   themeConfig: {
-    image: 'img/scenelith-docs-card.svg',
+    image: 'img/scenelith-docs-card-mono.svg',
     colorMode: {
       defaultMode: 'dark',
       disableSwitch: true,
@@ -51,7 +51,7 @@ const config: Config = {
       title: 'Scenelith',
       logo: {
         alt: 'Scenelith',
-        src: 'img/scenelith-mark.svg',
+        src: 'img/scenelith-mark-mono.svg',
       },
       items: [
         {to: '/canvas/overview', label: 'Canvas', position: 'left'},
