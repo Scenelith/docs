@@ -262,10 +262,22 @@ code {
 table {
   display: table;
   width: 100%;
+  max-width: 100%;
+  table-layout: fixed;
   overflow: hidden;
   border: 1px solid var(--doc-line);
   border-radius: 12px;
   background: rgba(15, 15, 16, 0.86);
+}
+table code { white-space: normal; overflow-wrap: anywhere; }
+
+@media (max-width: 768px) {
+  table {
+    display: block;
+    table-layout: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
 }
 table thead { background: #181819; }
 table th {
