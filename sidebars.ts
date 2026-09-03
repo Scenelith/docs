@@ -63,7 +63,7 @@ const sidebars: SidebarsConfig = {
     {
       type: 'category',
       label: 'Cloud',
-      items: ['cloud/plans-and-credits', 'cloud/team-access', 'cloud/notifications-and-tasks', 'cloud/support', 'cloud/feature-board'],
+      items: ['cloud/plans-and-credits', 'cloud/affiliate-program', 'cloud/team-access', 'cloud/notifications-and-tasks', 'cloud/support', 'cloud/feature-board'],
     },
     {
       type: 'category',

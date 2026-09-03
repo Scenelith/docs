@@ -80,7 +80,8 @@ Tikwm resolves public TikTok imports and has no configured key.
 | `S3_PRIVATE_BUCKET` | `scenelith-private` | Private source and generated media. |
 | `S3_PUBLIC_BUCKET` | `scenelith-public` | Publicly deliverable media. |
 | `S3_FORCE_PATH_STYLE` | `false` | Enable when the compatible service requires path-style requests. |
-| `STORAGE_CORS_ORIGINS` | empty | Additional allowed browser origins; `PUBLIC_URL` remains authoritative. |
+| `STORAGE_CORS_MANAGED` | `true` | Apply and verify Scenelith's managed CORS rule on both S3-compatible buckets during start, restart and update. |
+| `STORAGE_CORS_ORIGINS` | empty | Additional comma-separated browser origins; `PUBLIC_URL` is used by default. |
 
 ## Worker concurrency
 

@@ -33,6 +33,15 @@ Default media lives in the persistent `scenelith-data` Docker volume. PostgreSQL
 
 Set `STORAGE_PROVIDER=s3` and the `S3_*` environment values. Leave `S3_ENDPOINT` empty for AWS S3; set it for compatible services such as MinIO, Backblaze, Cloudflare R2 or DigitalOcean Spaces.
 
-Create both configured private/public buckets. Their CORS policy must allow origins in `PUBLIC_URL` or `STORAGE_CORS_ORIGINS`, methods `GET`, `HEAD`, `PUT`, request headers `content-type` and `range`, and response headers `etag`, `content-length`, `content-range`.
+Create both configured private/public buckets. With `STORAGE_CORS_MANAGED=true`, `./scenelith start`, `restart` and `update` apply and verify the required CORS rule automatically. The storage credentials need permission to read and write bucket CORS in addition to object access. Existing unrelated CORS rules are preserved.
+
+`PUBLIC_URL` is the browser origin by default. Set `STORAGE_CORS_ORIGINS` to a comma-separated list only when another origin, such as a local development URL, also needs direct media access. Check or reapply the managed rule explicitly with:
+
+```bash
+./scenelith storage check-cors
+./scenelith storage configure-cors
+```
+
+The managed policy allows `GET`, `HEAD`, `PUT`, request headers `content-type` and `range`, and response headers `etag`, `content-length`, `content-range`. A permission error is reported without taking the entire instance offline, but browser uploads may fail until the rule is fixed. Set `STORAGE_CORS_MANAGED=false` only when bucket policy is managed independently, then verify the equivalent rule with the storage provider.
 
 TikTok import sends a public post URL to Tikwm and does not use a logged-in TikTok account or cookies.

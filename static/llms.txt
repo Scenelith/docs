@@ -75,6 +75,7 @@ Scenelith is a visual AI production workspace. This file is the compact document
 ## Cloud
 
 - [Plans and credit balance](https://docs.scenelith.com/cloud/plans-and-credits): Cloud plan allowances, concurrency and purchased-credit behavior.
+- [Affiliate program](https://docs.scenelith.com/cloud/affiliate-program): Join Scenelith Partners, use your tracked link and understand attribution, recurring commission and payouts.
 - [Team access](https://docs.scenelith.com/cloud/team-access): Studio seats, invitations and exact project/Canvas grants.
 - [Notifications and tasks](https://docs.scenelith.com/cloud/notifications-and-tasks): Track replies, roadmap updates, generations and Automation work.
 - [Support](https://docs.scenelith.com/cloud/support): Create a ticket, continue the thread and understand its state.
