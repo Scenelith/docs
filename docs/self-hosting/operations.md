@@ -25,6 +25,8 @@ Run commands from the installed Scenelith directory. The launcher always uses `d
 | `./scenelith backup [--output DIR]` | Creates a checksummed PostgreSQL and local-media backup. |
 | `./scenelith restore --from DIR --confirm` | Verifies and replaces the current database and local media. |
 | `./scenelith update [VERSION]` | Backs up and installs the latest or exact release with automatic image/config rollback on failed health. |
+| `./scenelith storage configure-cors` | Applies and verifies the managed browser-upload CORS rule on both S3-compatible buckets. |
+| `./scenelith storage check-cors` | Checks the managed bucket CORS rule without changing it. |
 | `./scenelith help` | Prints the launcher command reference. |
 
 ## Services

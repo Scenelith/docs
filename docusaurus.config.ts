@@ -80,6 +80,7 @@ const config: Config = {
             {label: 'Canvas', to: '/canvas/overview'},
             {label: 'Automation', to: '/automation/overview'},
             {label: 'MCP', to: '/mcp/connect'},
+            {label: 'Affiliate program', to: '/cloud/affiliate-program'},
           ],
         },
         {

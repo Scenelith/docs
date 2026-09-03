@@ -1,5 +1,5 @@
 {
-  "coreRevision": "09f49522970f7593cbcaccea44e06eb5948f82eb",
+  "coreRevision": "0e92fc4a145886757a98f23dd386a326549540f2",
   "coreDirty": false,
   "sourceHashes": {
     "canvasContract": "fec8d074f019838b9d2bdff897c042e7b7aceea0ac9c695868346ba7815b3af4",
@@ -8,14 +8,14 @@
     "assistantModels": "f738c6cbf6cf5104c829c835764679482b509933b63cf1f5da692152e1a2ff64",
     "automationRegistry": "4d5d1540975274d2a232642d786fb5c721da57a3a11151452aff9977ed1282c6",
     "mcpServer": "0d4035304ca29198f53e32f648eda5f199f252a93b1e3c10c92c41a2781a0b40",
-    "selfhostEnvironment": "35d1d070a19d231afa9106992b124fe15860eacdc655cc32e6e7448c72211c12",
-    "selfhostLauncher": "c76577324cb7f1ffbcf0b2edd19996253530f3a68385079a050d94ad9bbe0ec4",
+    "selfhostEnvironment": "d0d777774e7ac30b7c2e79d3e225f0c39892e70c38abf1fcbff6393609fb4c22",
+    "selfhostLauncher": "545472235a1d679674e7981e2ba53208bbea8e82fa8d7b9310711efbadcac9fc",
     "selfhostCompose": "e23643d8664cb94f1a25da60f8ba954f5272a8c5c516a08e729edeb05a25a39e",
-    "sharedRuntimeCompose": "1a4fe857d19f67162b5adc68ec605d03c4143abf407be8cf54caa35a7aebc9ed",
+    "sharedRuntimeCompose": "f137495c9432495349b8596a783ed8ce2a4453783559f7f8723d31fd17d49320",
     "selfhostInstaller": "65b74fd70e157e861a6fc53e36c27a5bc8f1a784bfbbad228afd813ce765ccff",
     "selfhostProviders": "d5ed5412e1dc04c9d9a7ddc25b8cff502dba5f9be0aad00b69c66884deb23b8b"
   },
-  "generatedAt": "2026-08-31T08:59:28.993Z",
+  "generatedAt": "2026-09-03T10:19:24.221Z",
   "canvasNodeKinds": [
     "source",
     "scene",
@@ -161,6 +161,7 @@
       "S3_PRIVATE_BUCKET",
       "S3_PUBLIC_BUCKET",
       "S3_FORCE_PATH_STYLE",
+      "STORAGE_CORS_MANAGED",
       "STORAGE_CORS_ORIGINS",
       "SELFHOST_GENERATION_CONCURRENCY",
       "TIKTOK_AUTOMATION_CONCURRENCY"
@@ -177,6 +178,8 @@
       "backup",
       "restore",
       "update",
+      "storage",
+      "storage",
       "config",
       "help"
     ],
